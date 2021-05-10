@@ -81,7 +81,7 @@ public class RandPassGenerator {
 	/**
 	 * Print an error message to stderr
 	 */
-	private void message(String s) {
+	void message(String s) {
 		System.err.println(s);
 	}
 
@@ -629,7 +629,7 @@ public class RandPassGenerator {
 	/**
 	 * Set up the options manager for this RandPassGenerator.
 	 */
-	private static OptionManager makeOptions() {
+	static OptionManager makeOptions() {
 		OptionManager ret;
 		ret = new OptionManager();
 
