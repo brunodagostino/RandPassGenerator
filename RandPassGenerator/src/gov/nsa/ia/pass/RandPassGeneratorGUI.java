@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
+import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
@@ -63,44 +65,68 @@ public class RandPassGeneratorGUI extends JFrame {
 	public RandPassGeneratorGUI() {
 		setTitle("RandPassGenerator");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 900, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
-		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_contentPane.columnWidths = new int[] { 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
+
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
+		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
+		gbc_tabbedPane.gridx = 0;
+		gbc_tabbedPane.gridy = 0;
+		contentPane.add(tabbedPane, gbc_tabbedPane);
+
+		JSplitPane splitPane = new JSplitPane();
+		splitPane.setEnabled(false);
+		tabbedPane.addTab("Passwords", null, splitPane, null);
+
+		JPanel panel = new JPanel();
+		splitPane.setLeftComponent(panel);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[] { 0, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
+		gbl_panel.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panel.setLayout(gbl_panel);
 
 		JLabel lblNumPasswords = new JLabel("Num Passwords");
 		GridBagConstraints gbc_lblNumPasswords = new GridBagConstraints();
-		gbc_lblNumPasswords.fill = GridBagConstraints.VERTICAL;
-		gbc_lblNumPasswords.anchor = GridBagConstraints.EAST;
+		gbc_lblNumPasswords.fill = GridBagConstraints.BOTH;
 		gbc_lblNumPasswords.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNumPasswords.gridx = 0;
 		gbc_lblNumPasswords.gridy = 0;
-		contentPane.add(lblNumPasswords, gbc_lblNumPasswords);
+		panel.add(lblNumPasswords, gbc_lblNumPasswords);
 
 		JSpinner spinner = new JSpinner();
 		GridBagConstraints gbc_spinner = new GridBagConstraints();
-		gbc_spinner.fill = GridBagConstraints.VERTICAL;
+		gbc_spinner.fill = GridBagConstraints.BOTH;
 		gbc_spinner.insets = new Insets(0, 0, 5, 0);
 		gbc_spinner.gridx = 1;
 		gbc_spinner.gridy = 0;
-		contentPane.add(spinner, gbc_spinner);
+		panel.add(spinner, gbc_spinner);
 
 		JLabel lblStrength = new JLabel("Strength");
 		GridBagConstraints gbc_lblStrength = new GridBagConstraints();
-		gbc_lblStrength.fill = GridBagConstraints.VERTICAL;
-		gbc_lblStrength.anchor = GridBagConstraints.EAST;
+		gbc_lblStrength.fill = GridBagConstraints.BOTH;
 		gbc_lblStrength.insets = new Insets(0, 0, 5, 5);
 		gbc_lblStrength.gridx = 0;
 		gbc_lblStrength.gridy = 1;
-		contentPane.add(lblStrength, gbc_lblStrength);
+		panel.add(lblStrength, gbc_lblStrength);
 
 		JSlider slider = new JSlider();
+		GridBagConstraints gbc_slider = new GridBagConstraints();
+		gbc_slider.fill = GridBagConstraints.BOTH;
+		gbc_slider.insets = new Insets(0, 0, 5, 0);
+		gbc_slider.gridx = 1;
+		gbc_slider.gridy = 1;
+		panel.add(slider, gbc_slider);
 		slider.setValue(256);
 		slider.setMajorTickSpacing(32);
 		slider.setMinorTickSpacing(32);
@@ -109,78 +135,57 @@ public class RandPassGeneratorGUI extends JFrame {
 		slider.setPaintLabels(true);
 		slider.setPaintTicks(true);
 		slider.setSnapToTicks(true);
-		GridBagConstraints gbc_slider = new GridBagConstraints();
-		gbc_slider.fill = GridBagConstraints.VERTICAL;
-		gbc_slider.insets = new Insets(0, 0, 5, 0);
-		gbc_slider.gridx = 1;
-		gbc_slider.gridy = 1;
-		contentPane.add(slider, gbc_slider);
 
 		JLabel lblPasswordCharset = new JLabel("Password Charset");
 		GridBagConstraints gbc_lblPasswordCharset = new GridBagConstraints();
-		gbc_lblPasswordCharset.fill = GridBagConstraints.VERTICAL;
-		gbc_lblPasswordCharset.anchor = GridBagConstraints.EAST;
+		gbc_lblPasswordCharset.fill = GridBagConstraints.BOTH;
 		gbc_lblPasswordCharset.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPasswordCharset.gridx = 0;
 		gbc_lblPasswordCharset.gridy = 2;
-		contentPane.add(lblPasswordCharset, gbc_lblPasswordCharset);
+		panel.add(lblPasswordCharset, gbc_lblPasswordCharset);
 
 		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] { "a0" }));
-		comboBox_2.setEditable(true);
 		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-		gbc_comboBox_2.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_2.fill = GridBagConstraints.BOTH;
+		gbc_comboBox_2.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_2.gridx = 1;
 		gbc_comboBox_2.gridy = 2;
-		contentPane.add(comboBox_2, gbc_comboBox_2);
+		panel.add(comboBox_2, gbc_comboBox_2);
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] { "a0" }));
+		comboBox_2.setEditable(true);
 
 		JLabel lblNewLabel = new JLabel("Verbose");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 3;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
+		panel.add(lblNewLabel, gbc_lblNewLabel);
 
 		JCheckBox chckbxVerbose = new JCheckBox("");
 		GridBagConstraints gbc_chckbxVerbose = new GridBagConstraints();
-		gbc_chckbxVerbose.fill = GridBagConstraints.VERTICAL;
+		gbc_chckbxVerbose.fill = GridBagConstraints.BOTH;
 		gbc_chckbxVerbose.insets = new Insets(0, 0, 5, 0);
 		gbc_chckbxVerbose.gridx = 1;
 		gbc_chckbxVerbose.gridy = 3;
-		contentPane.add(chckbxVerbose, gbc_chckbxVerbose);
-
-		JScrollPane scrollPane = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 4;
-		contentPane.add(scrollPane, gbc_scrollPane);
-
-		JTextArea txtr = new JTextArea();
-		PrintStream printStream = new PrintStream(new CustomOutputStream(txtr));
-		System.setOut(printStream);
-		System.setErr(printStream);
-		txtr.setEditable(false);
-		txtr.setWrapStyleWord(true);
-		txtr.setTabSize(4);
-		txtr.setRows(1);
-		txtr.setColumns(1);
-		txtr.setLineWrap(true);
-		scrollPane.setViewportView(txtr);
+		panel.add(chckbxVerbose, gbc_chckbxVerbose);
 
 		JButton btnGenerate = new JButton("Generate");
+		GridBagConstraints gbc_btnGenerate = new GridBagConstraints();
+		gbc_btnGenerate.fill = GridBagConstraints.BOTH;
+		gbc_btnGenerate.gridx = 1;
+		gbc_btnGenerate.gridy = 4;
+		panel.add(btnGenerate, gbc_btnGenerate);
 		btnGenerate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String args[] = null;
-				
-				if(chckbxVerbose.isSelected()) {
+
+				if (chckbxVerbose.isSelected()) {
 					args = new String[7];
 					args[6] = "-v";
-				} else if(!chckbxVerbose.isSelected())
+				} else if (!chckbxVerbose.isSelected())
 					args = new String[6];
-				
+
 				args[0] = "-str";
 				args[1] = String.valueOf(slider.getValue());
 				args[2] = "-pw";
@@ -254,10 +259,34 @@ public class RandPassGeneratorGUI extends JFrame {
 				}
 			}
 		});
-		GridBagConstraints gbc_btnGenerate = new GridBagConstraints();
-		gbc_btnGenerate.gridx = 1;
-		gbc_btnGenerate.gridy = 5;
-		contentPane.add(btnGenerate, gbc_btnGenerate);
+
+		JPanel panel_1 = new JPanel();
+		splitPane.setRightComponent(panel_1);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[] { 0, 0 };
+		gbl_panel_1.rowHeights = new int[] { 0, 0 };
+		gbl_panel_1.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panel_1.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+		panel_1.setLayout(gbl_panel_1);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.gridx = 0;
+		gbc_scrollPane_1.gridy = 0;
+		panel_1.add(scrollPane_1, gbc_scrollPane_1);
+
+		JTextArea txtr_1 = new JTextArea();
+		PrintStream printStream = new PrintStream(new CustomOutputStream(txtr_1));
+		System.setOut(printStream);
+		System.setErr(printStream);
+		txtr_1.setWrapStyleWord(true);
+		txtr_1.setTabSize(4);
+		txtr_1.setRows(1);
+		txtr_1.setLineWrap(true);
+		txtr_1.setEditable(false);
+		txtr_1.setColumns(1);
+		scrollPane_1.setViewportView(txtr_1);
 	}
 
 }
