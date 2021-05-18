@@ -1,6 +1,7 @@
 package gov.nsa.ia.pass;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -13,6 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -84,6 +86,7 @@ public class RandPassGeneratorGUI extends JFrame {
 		contentPane.add(tabbedPane, gbc_tabbedPane);
 
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setResizeWeight(0.1);
 		splitPane.setEnabled(false);
 		tabbedPane.addTab("Passwords", null, splitPane, null);
 
@@ -277,6 +280,7 @@ public class RandPassGeneratorGUI extends JFrame {
 		panel_1.add(scrollPane_1, gbc_scrollPane_1);
 
 		JTextArea txtr_1 = new JTextArea();
+		txtr_1.setFont(new Font("Monospaced", Font.PLAIN, 13));
 		PrintStream printStream = new PrintStream(new CustomOutputStream(txtr_1));
 		System.setOut(printStream);
 		System.setErr(printStream);
@@ -287,6 +291,118 @@ public class RandPassGeneratorGUI extends JFrame {
 		txtr_1.setEditable(false);
 		txtr_1.setColumns(1);
 		scrollPane_1.setViewportView(txtr_1);
+
+		JSplitPane splitPane_1 = new JSplitPane();
+		splitPane_1.setContinuousLayout(true);
+		splitPane_1.setResizeWeight(0.1);
+		tabbedPane.addTab("Passphrases", null, splitPane_1, null);
+
+		JPanel panel_2 = new JPanel();
+		splitPane_1.setLeftComponent(panel_2);
+		GridBagLayout gbl_panel_2 = new GridBagLayout();
+		gbl_panel_2.columnWidths = new int[] { 0, 0 };
+		gbl_panel_2.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
+		gbl_panel_2.columnWeights = new double[] { 1.0, 1.0 };
+		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panel_2.setLayout(gbl_panel_2);
+
+		JLabel lblNumPassphrases = new JLabel("Num Passphrases");
+		GridBagConstraints gbc_lblNumPassphrases = new GridBagConstraints();
+		gbc_lblNumPassphrases.fill = GridBagConstraints.BOTH;
+		gbc_lblNumPassphrases.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNumPassphrases.gridx = 0;
+		gbc_lblNumPassphrases.gridy = 0;
+		panel_2.add(lblNumPassphrases, gbc_lblNumPassphrases);
+
+		JSpinner spinner_1 = new JSpinner();
+		GridBagConstraints gbc_spinner_1 = new GridBagConstraints();
+		gbc_spinner_1.insets = new Insets(0, 0, 5, 0);
+		gbc_spinner_1.fill = GridBagConstraints.BOTH;
+		gbc_spinner_1.gridx = 1;
+		gbc_spinner_1.gridy = 0;
+		panel_2.add(spinner_1, gbc_spinner_1);
+
+		JLabel lblNewLabel_1 = new JLabel("Passphrases URL");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_1.gridx = 0;
+		gbc_lblNewLabel_1.gridy = 1;
+		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		GridBagConstraints gbc_formattedTextField = new GridBagConstraints();
+		gbc_formattedTextField.insets = new Insets(0, 0, 5, 0);
+		gbc_formattedTextField.fill = GridBagConstraints.BOTH;
+		gbc_formattedTextField.gridx = 1;
+		gbc_formattedTextField.gridy = 1;
+		panel_2.add(formattedTextField, gbc_formattedTextField);
+
+		JLabel lblStrength_1 = new JLabel("Strength");
+		GridBagConstraints gbc_lblStrength_1 = new GridBagConstraints();
+		gbc_lblStrength_1.fill = GridBagConstraints.BOTH;
+		gbc_lblStrength_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblStrength_1.gridx = 0;
+		gbc_lblStrength_1.gridy = 2;
+		panel_2.add(lblStrength_1, gbc_lblStrength_1);
+
+		JSlider slider_1 = new JSlider();
+		slider_1.setValue(256);
+		slider_1.setSnapToTicks(true);
+		slider_1.setPaintTicks(true);
+		slider_1.setPaintLabels(true);
+		slider_1.setMinorTickSpacing(32);
+		slider_1.setMinimum(128);
+		slider_1.setMaximum(256);
+		slider_1.setMajorTickSpacing(32);
+		GridBagConstraints gbc_slider_1 = new GridBagConstraints();
+		gbc_slider_1.insets = new Insets(0, 0, 5, 0);
+		gbc_slider_1.fill = GridBagConstraints.BOTH;
+		gbc_slider_1.gridx = 1;
+		gbc_slider_1.gridy = 2;
+		panel_2.add(slider_1, gbc_slider_1);
+
+		JLabel lblNewLabel_2 = new JLabel("Maximum Word Length");
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_2.gridx = 0;
+		gbc_lblNewLabel_2.gridy = 3;
+		panel_2.add(lblNewLabel_2, gbc_lblNewLabel_2);
+
+		JLabel lblNewLabel_3 = new JLabel("Verbose");
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel_3.gridx = 0;
+		gbc_lblNewLabel_3.gridy = 4;
+		panel_2.add(lblNewLabel_3, gbc_lblNewLabel_3);
+
+		JCheckBox chckbxVerbose_1 = new JCheckBox("");
+		GridBagConstraints gbc_chckbxVerbose_1 = new GridBagConstraints();
+		gbc_chckbxVerbose_1.fill = GridBagConstraints.BOTH;
+		gbc_chckbxVerbose_1.gridx = 1;
+		gbc_chckbxVerbose_1.gridy = 4;
+		panel_2.add(chckbxVerbose_1, gbc_chckbxVerbose_1);
+
+		JPanel panel_3 = new JPanel();
+		splitPane_1.setRightComponent(panel_3);
+		GridBagLayout gbl_panel_3 = new GridBagLayout();
+		gbl_panel_3.columnWidths = new int[] { 0, 0 };
+		gbl_panel_3.rowHeights = new int[] { 0, 0 };
+		gbl_panel_3.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panel_3.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+		panel_3.setLayout(gbl_panel_3);
+
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 0;
+		panel_3.add(scrollPane, gbc_scrollPane);
+
+		JTextArea textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
 	}
 
 }
